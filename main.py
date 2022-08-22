@@ -42,13 +42,15 @@ def get_words():
 
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
+def get_hello():
+  return "今日" + city + "天气"
 
 
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 wea, temperature,high,low,pm25,humidity,wind = get_weather()
-data = {"hello":{"value":"今日天气","color":get_random_color()},
+data = {"hello":{"value":get_hello(),"color":get_random_color()},
         "weather":{"value":wea},
         "temperature":{"value":temperature},
         "weather_high":{"value":high},
