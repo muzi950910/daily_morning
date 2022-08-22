@@ -23,10 +23,10 @@ def get_weather():
   res = requests.get(url).json()
   weather = res['data']['list'][0]
   return weather['weather'],
-        round(weather['temp'],1),
-        round(weather['high'],1),
-        round(weather['low'],1),
-        round(weather['pm25'],1),
+        '%.1f'%(weather['temp']),
+        '%.1f'%(weather['high']),
+        '%.1f'%(weather['low']),
+        '%.1f'%(weather['pm25']),
         round['humidity'],
         weather['wind']
 
