@@ -62,5 +62,6 @@ data = {"hello":{"value":get_hello(),"color":get_random_color()},
         "birthday_left":{"value":get_birthday()},
         "words":{"value":get_words(), "color":get_random_color()}
        }
-res = wm.send_template(user_id, template_id, data)
-print(res)
+for tempId in template_id:
+  res = wm.send_template(user_id, tempId, data)
+  print(res)
