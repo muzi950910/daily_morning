@@ -1,6 +1,7 @@
 from datetime import date, datetime
 import math
 from wechatpy import WeChatClient
+from decimal import Decimal
 from wechatpy.client.api import WeChatMessage, WeChatTemplate
 import requests
 import os
@@ -22,7 +23,12 @@ def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
   res = requests.get(url).json()
   weather = res['data']['list'][0]
-  return weather['weather'], math.floor(weather['temp']),math.floor(weather['high']),math.floor(weather['low']),math.floor(weather['pm25']),weather['humidity'],weather['wind']
+  return weather['weather'],
+        Decimal(weather['temp']).quantize(Decimal("0.0")),
+        Decimal(weather['high']).quantize(Decimal("0.0")),
+        Decimal(weather['low']).quantize(Decimal("0.0")),
+        Decimal(weather['pm25']).quantize(Decimal("0.0")),
+        weather['humidity'],weather['wind']
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
@@ -48,7 +54,8 @@ client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 wea, temperature,high,low,pm25,humidity,wind = get_weather()
-data = {"weather":{"value":wea},
+data = {"hello":{"value":"今日天气","color":get_random_color()},
+        "weather":{"value":wea},
         "temperature":{"value":temperature},
         "weather_high":{"value":high},
         "weather_low":{"value":low},
