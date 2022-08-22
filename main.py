@@ -15,7 +15,7 @@ app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
 
 user_id = os.environ["USER_ID"]
-template_id = ["oVety6As9En5xSh3duqqS8FW3LTM", "oVety6H-ZozLhxDzDnHhT-Y2I98E"]
+template_id = os.environ["TEMPLATE_ID"]
 
 
 def get_weather():
@@ -62,6 +62,6 @@ data = {"hello":{"value":get_hello(),"color":get_random_color()},
         "birthday_left":{"value":get_birthday()},
         "words":{"value":get_words(), "color":get_random_color()}
        }
-for tempId in template_id:
-  res = wm.send_template(user_id, tempId, data)
+for id in user_id.split(','):
+  res = wm.send_template(id, tempId, data)
   print(res)
