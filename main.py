@@ -63,5 +63,5 @@ data = {"hello":{"value":get_hello(),"color":get_random_color()},
         "words":{"value":get_words(), "color":get_random_color()}
        }
 for id in user_id.split(','):
-  res = wm.send_template(id, tempId, data)
+  res = wm.send_template(id, template_id, data)
   print(res)
